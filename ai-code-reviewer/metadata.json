@@ -1,0 +1,5 @@
+{
+  "name": "OpenCode Code Reviewer",
+  "description": "An automated code review tool that uses the Gemini API to analyze code and provide feedback on potential issues, best practices, and areas for improvement.",
+  "requestFramePermissions": []
+}
