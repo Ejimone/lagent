@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply text-white;
+  @apply bg-gray-950;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+button {
+  @apply rounded bg-blue-500 px-4 py-2 mr-4 font-semibold text-white;
+}
+
+a {
+  @apply underline underline-offset-4;
+}
+
+pre {
+  @apply p-4;
+  @apply rounded-lg;
+  @apply overflow-x-auto;
+  @apply border;
+  @apply border-gray-800;
+  background-color: black !important;
+}
+
+.markdown {
+  @apply prose prose-invert;
+}
+
+body > div {
+  @apply max-w-screen-md mx-auto m-8 p-8 pt-1 rounded-lg bg-black;
+}

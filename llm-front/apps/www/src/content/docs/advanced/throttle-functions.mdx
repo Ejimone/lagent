@@ -1,0 +1,98 @@
+---
+title: Throttle functions
+description: ""
+---
+
+import { siteConfig } from "@/config/site";
+
+Throttle functions control how quickly the LLM's output is displayed.
+
+Throttle functions can:
+
+- Smooth out pauses in the LLM's streamed output
+- Allows blocks to parse the LLM output before the user sees it.
+  - This allows blocks to hide 'non-user' characters from the user (e.g. `##` in a markdown header)
+
+# Usage with `useLLMOutput`
+
+Throttle functions are passed to the `useLLMOutput` hook.
+
+```ts
+const { blockMatches } = useLLMOutput({
+  llmOutput: output,
+  blocks: [],
+  fallbackBlock,
+  isStreamFinished,
+  throttle: ..., // <- throttle function
+});
+```
+
+# Built in throttle functions
+
+llm-ui comes with a built-in throttle function:
+
+## `throttleBasic`
+
+`throttleBasic` is the default throttle function for llm-ui.
+
+```ts
+import { throttleBasic } from "@llm-ui/react";
+
+const throttle = throttleBasic({
+  readAheadChars: 10,
+  targetBufferChars: 7,
+  adjustPercentage: 0.35,
+  frameLookBackMs: 10000,
+  windowLookBackMs: 2000,
+});
+
+const { blockMatches } = useLLMOutput({
+  llmOutput: output,
+  blocks: [],
+  fallbackBlock,
+  isStreamFinished,
+  throttle, // <- used here
+});
+```
+
+`throttleBasic` has the following options:
+
+### `readAheadChars` (number)
+
+Default: `10`
+
+The number of visible characters to withhold from the user whilst `isStreamFinished` is `false`.
+
+### `targetBufferChars` (number)
+
+Default: `9`
+
+The target number of characters behind the actual LLM output `useLLMOutput` should be.
+
+`readAheadChars` is already taken into account when calculating this value.
+
+### `frameLookBackMs` (number)
+
+default: `10000`
+
+The number of milliseconds to look back when making estimations about how fast the visible text is being produced.
+
+### `adjustPercentage` (number)
+
+Default: `0.2`
+
+When the throttle is behind the target number of visible characters, the throttle will increase the number of visible characters displayed by this factor to catch back up to the target.
+
+When the throttle is ahead of the target number of visible characters, the throttle will decrease the number of visible characters displayed by this factor to slow down and get back to the target.
+
+### `windowLookBackMs` (number)
+
+Default: `2000`
+
+Calculates the window size to break the `frameLookBackMs` into when calculating the average visible text per frame.
+
+# Writing your own throttle function
+
+Writing your own throttle function is an advanced endeavour. If you're thinking of writing one or `throttleBasic` doesn't meet your needs please feel free to hop into our discord to chat.
+
+Check out the type: [ThrottleFunction](https://github.com/llm-ui-kit/llm-ui/blob/main/packages/react/src/core/useLLMOutput/types.ts) to see the shape of a throttle function.

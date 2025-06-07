@@ -1,0 +1,44 @@
+---
+title: Custom blocks
+description: ""
+---
+
+import { LinkButton } from "@/components/ui/custom/LinkButton";
+
+Custom blocks allow LLMs to reply with specific formats which can be rendered as custom components in your application.
+
+# Formats
+
+## Json
+
+<CodeBlockInline>
+
+```plain
+【{ type:"buttons", buttons: [{text:"Button 1"}, {text:"Button 2"}] }】
+```
+
+</CodeBlockInline>
+
+- ✅ Good for advanced use cases
+- ⚠️ High overhead of non-content characters
+
+<div className="mt-6">
+  <LinkButton href="/docs/blocks/json">Read the docs</LinkButton>
+</div>
+
+## CSV
+
+<CodeBlockInline>
+
+```plain
+⦅buttons,Button 1,Button 2⦆
+```
+
+</CodeBlockInline>
+
+- ✅ Good for simple responses
+- ✅ Low overhead of non-content characters (only: `⦅` `,` `⦆`)
+
+<div className="mt-6">
+  <LinkButton href="/docs/blocks/csv">Read the docs</LinkButton>
+</div>

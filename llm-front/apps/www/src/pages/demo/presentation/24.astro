@@ -1,0 +1,20 @@
+---
+import PresentationLayout from "@/layouts/PresentationLayout.astro";
+import BuiltWith from "@/components/presentation/BuiltWith.astro";
+import { ExampleTabs } from "@/components/examples/Example";
+
+const example = `Buttons example\n【{type:"buttons",buttons:[{text:"Star ⭐"}, {text:"Confetti 🎉"}]}】${"‎".repeat(100)}`;
+---
+
+<PresentationLayout title="LLM UI">
+  <ExampleTabs
+    client:load
+    className="min-w-[650px]"
+    example={example}
+    tabs={["raw", "llm-ui"]}
+    showPlayPause
+    loop={false}
+    options={{ delayMultiplier: 0.5, autoStart: false }}
+  />
+  <BuiltWith />
+</PresentationLayout>

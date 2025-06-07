@@ -1,0 +1,30 @@
+---
+import PresentationLayout from "@/layouts/PresentationLayout.astro";
+import BuiltWith from "@/components/presentation/BuiltWith.astro";
+import { ExampleTabs } from "@/components/examples/Example";
+
+const example = `## Header 2\n\n\`\`\`python\nprint("Hello llm-ui")\n\`\`\`
+- *italics*
+- **bold**
+- [link](https://llm-ui.com)
+- ~~strikethrough~~
+`;
+---
+
+<PresentationLayout title="LLM UI">
+  <ExampleTabs
+    client:load
+    className="min-w-[650px]"
+    example={example}
+    tabs={["llm-ui"]}
+    showPlayPause
+    loop={false}
+    throttle="buffered"
+    options={{
+      delayMultiplier: 1,
+      autoStart: false,
+      tokenCharsProbabilities: [{ tokenChars: 1, prob: 1 }],
+    }}
+  />
+  <BuiltWith />
+</PresentationLayout>
