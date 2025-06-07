@@ -1,8 +1,0 @@
-{
-  "name": "@llm-ui/tsconfig",
-  "version": "0.0.5",
-  "private": true,
-  "files": [
-    "base.json"
-  ]
-}

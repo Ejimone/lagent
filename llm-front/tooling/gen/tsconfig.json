@@ -1,5 +1,0 @@
-{
-  "extends": "@llm-ui/tsconfig/base",
-  "include": ["src/**/*", "*.ts", "test"],
-  "exclude": ["node_modules"]
-}
